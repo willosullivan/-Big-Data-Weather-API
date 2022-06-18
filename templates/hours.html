@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last 48 Hours</title>
+</head>
+
+<body>
+    <div>
+        <canvas width="720px" id="lineChart"></canvas>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+        const chart = document.getElementById("lineChart");
+        let lineChart = new Chart(chart, {
+            type: "line",
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            },
+            data: {
+                labels: {{ keys| safe}},
+                datasets: [
+                    {
+                        label: "Temprature",
+                        borderColor: "#fcf03d",
+                        backgroundColor: "#fff780",
+                        data: {{ data| safe}}
+                    }
+                ]
+            }
+        });
+    </script>
+</body>
+
+</html>

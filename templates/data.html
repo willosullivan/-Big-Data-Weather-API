@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Last 8 Days</title>
+</head>
+
+<body>
+    <div>
+        <canvas width="720px" id="lineChart"></canvas>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script>
+        const chart = document.getElementById("lineChart");
+        let lineChart = new Chart(chart, {
+            type: "line",
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: false
+                        }
+                    }]
+                }
+            },
+            data: {
+                labels: {{ keys| safe}},
+                datasets: [
+                    {
+                        label: "Day",
+                        borderColor: "#fcf03d",
+                        backgroundColor: "#fff780",
+                        data: {{ day| safe}}
+                    },
+                    {
+                        label: "Minimum",
+                        borderColor: "#439c9a",
+                        backgroundColor: "#8febe9",
+                        data: {{ min| safe}}
+                    },
+                    {
+                        label: "Maximmum",
+                        borderColor: "#ff4f4f",
+                        backgroundColor: "#ff7878",
+                        data: {{ max| safe}}
+                    },
+                    {
+                        label: "Night",
+                        borderColor: "#b442ff",
+                        backgroundColor: "#ca7aff",
+                        data: {{ night| safe}}
+                    },
+                    {
+                        label: "Evening",
+                        borderColor: "#ffa454",
+                        backgroundColor: "#ffb370",
+                        data: {{ eve| safe}}
+                    },
+                    {
+                        label: "Morning",
+                        borderColor: "#47ff8b",
+                        backgroundColor: "#7dffad",
+                        data: {{ morning| safe}}
+                    },
+                ]
+            }
+        });
+    </script>
+</body>
+
+</html>
