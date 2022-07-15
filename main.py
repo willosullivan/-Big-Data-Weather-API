@@ -1,22 +1,27 @@
 import requests
 import json
 from flask import Flask, render_template
+from apikey import API_KEY
 
 longitude = 144.9578
 latitude = -37.8082
-apiKey = "37bed561bf48e9084076d98cb79237af"
+apiKey = API_KEY
 
-# url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=minutely&appid={apiKey}"
 
+
+
+
+url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=minutely&appid={apiKey}"
 # data = requests.get(url=url)
 # with open('data.json', 'w+') as f:
 #     f.write(data.text)
 
-# data = json.loads(open('data.json', 'r+').read())
-# print(len(data['hourly']))
+data = json.loads(open('data.json', 'r+').read())
+print(len(data['hourly']))
 
 # # len(data['daily']) --> 8
 # # len(data['hourly']) --> 48
+
 
 app = Flask(__name__)
 
