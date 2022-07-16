@@ -43,19 +43,18 @@ apiKey = API_KEY
 
 # last 7 days
 
-url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=minutely,hourly&appid={apiKey}"
-data = requests.get(url=url)
-info = json.loads(data.text)
 
-# print(info.keys())
+def retrieve_data():
+    url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=minutely,hourly&appid={apiKey}"
+    data = requests.get(url=url)
+    info = json.loads(data.text)
 
-KEYS_CURRENT = info['current']
-KEYS_DAILY_TEST = info['daily'][0]
+    
+    KEYS_DAILY_TEST = info['daily']
 
-print(KEYS_DAILY_TEST)
+    df = pd.json_normalize(KEYS_DAILY_TEST)
 
-FIELDS = ["key", "fields.summary", "fields.issuetype.name", "fields.status.name", "fields.status.statusCategory.name"]
+    return df
 
-df = pd.json_normalize(KEYS_DAILY_TEST)
 
-df[FIELDS]
+

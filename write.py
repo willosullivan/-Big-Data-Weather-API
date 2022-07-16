@@ -1,6 +1,15 @@
 
+import enum
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
+import requests
+import json
+import pandas as pd
+from api_utils.apikey import API_KEY
+
+longitude = 144.9578
+latitude = -37.8082
+apiKey = API_KEY
 
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
@@ -36,11 +45,27 @@ data = [["Sunny", "5", "1", "43", "Cloudy"]]
 
 # print(res)
 
-def write_data():
 
-        res = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                        range ="Sheet2!A1:G1", valueInputOption="USER_ENTERED",
-                        insertDataOption="INSERT_ROWS", body={"values": data}).execute()
-        return res
 
-write_data()
+url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=minutely,hourly&appid={apiKey}"
+data = requests.get(url=url)
+info = json.loads(data.text)
+
+url1 = 'https://api.openweathermap.org/data/3.0/onecall?lat={latitude}&lon={lonitude}&exclude={part}&appid={apiKey}'
+
+KEYS = info.keys()
+
+print(KEYS)
+
+
+
+# df = pd.json_normalize(KEYS_DAILY_TEST)
+
+
+
+
+# res = sheet.values().append(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+#                 range ="Sheet2!A1:G1", valueInputOption="USER_ENTERED",
+#                 insertDataOption="INSERT_ROWS", body={"values": KEYS_DAILY_TEST}).execute()
+
+
