@@ -16,8 +16,8 @@ url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={long
 # with open('data.json', 'w+') as f:
 #     f.write(data.text)
 
-data = json.loads(open('data.json', 'r+').read())
-print(len(data['hourly']))
+# data = json.loads(open('data.json', 'r+').read())
+# print(len(data['hourly']))
 
 # # len(data['daily']) --> 8
 # # len(data['hourly']) --> 48

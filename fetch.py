@@ -1,7 +1,6 @@
 import requests
 import json 
 from api_utils.apikey import API_KEY
-import pandas as pd
 
 longitude = 144.9578
 latitude = -37.8082
@@ -50,11 +49,9 @@ def retrieve_data():
     info = json.loads(data.text)
 
     
-    KEYS_DAILY_TEST = info['daily']
+    to_store = info['daily']
 
-    df = pd.json_normalize(KEYS_DAILY_TEST)
-
-    return df
+    return to_store
 
 
 
