@@ -7,10 +7,6 @@ longitude = 144.9578
 latitude = -37.8082
 apiKey = API_KEY
 
-
-
-
-
 url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={longitude}&exclude=minutely&appid={apiKey}"
 # data = requests.get(url=url)
 # with open('data.json', 'w+') as f:
@@ -21,7 +17,6 @@ url = f"https://api.openweathermap.org/data/2.5/onecall?lat={latitude}&lon={long
 
 # # len(data['daily']) --> 8
 # # len(data['hourly']) --> 48
-
 
 app = Flask(__name__)
 
