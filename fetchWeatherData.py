@@ -18,6 +18,3 @@ def retrieve_data():
         return to_store
 
 
-
-
-
