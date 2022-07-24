@@ -8,6 +8,11 @@ app = Flask(__name__)
 def welcome():
     return render_template('welcome.html')
 
+@app.route('/read_database')
+def read_database():
+    
+
 if "__name__" == main:
     app.run(debug=True)
+    
     

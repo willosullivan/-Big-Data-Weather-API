@@ -1,8 +1,12 @@
 
+from operator import index
+from time import timezone
 import requests
 import json 
 from api_utils.apikey import API_KEY
-from datetime import datetime
+from datetime import datetime, timedelta
+import pandas as pd
+from googlesheetsAPI import updateValues
 
 # Define the longitude of Melbourne
 longitude = 144.9578
@@ -62,19 +66,50 @@ data_dict = info['daily']
 #       "uvi": 1.72
 #    }
 
-# print(data_dict)
+dt_to_update = ['dt', 'sunrise', 'sunset', 'moonrise', 'moonset']
+for i in data_dict:
+        for k in dt_to_update:
+                # i[k] = datetime.utcfromtimestamp(i[k]).strftime('%Y-%m-%d %H:%M:%S')
+                # i[k] = i[k]+36000
+                i[k] = (datetime.utcfromtimestamp(i[k])+timedelta(hours=10)).strftime('%Y-%m-%d %H:%M:%S')
+                # print(type(i[k]))
+
+i = pd.json_normalize(data_dict)
+print(i)
+
+for index, row in i.iterrows():
+        to_update = row.to_list()
+        print(to_update)
+        break
+        updateValues(to_update)
+
+
+
+
+
+
+
+
+# for i in data_dict:
+#         for k in dt_to_update:
+#                 # i[k] = datetime.utcfromtimestamp(i[k]).strftime('%Y-%m-%d %H:%M:%S')
+#                 # i[k] = i[k]+36000
+#                 i[k] = (datetime.utcfromtimestamp(i[k])+timedelta(hours=10)).strftime('%Y-%m-%d %H:%M:%S')
+#                 # print(type(i[k]))
+
+                
+
+# print(json.dumps(data_dict, indent=2))
+
 
 # THE FUCNTION to apply: 
 # datetime.utcfromtimestamp(i).strftime('%Y-%m-%d %H:%M:%S')
 
 # The keys to apply it on: ['dt', 'sunrise', 'sunset', 'moonrise', 'moonset']
 
-dt_to_update = ['dt', 'sunrise', 'sunset', 'moonrise', 'moonset']
 
-for i in data_dict:
-        for key, value in i:
-                if key in dt_to_update:
-                        print('lfg fam')
+
+
         
 
 # for element in dt_to_update:
@@ -102,33 +137,15 @@ for i in data_dict:
 #         data_dict[i] - data_dict.update(datetime.utcfromtimestamp(i).strftime('%Y-%m-%d %H:%M:%S'))
 #         print(i)
 
-def update_dict(data, dt, sunrise, sunset, moonrise, moonset):
+# def update_dict(data, dt, sunrise, sunset, moonrise, moonset):
         
-        data.update({
-                'dt': datetime.utcfromtimestamp(dt).strftime('%Y-%m-%d %H:%M:%S'),
-                'sunrise': datetime.utcfromtimestamp(sunrise).strftime('%Y-%m-%d %H:%M:%S'),
-                'sunset': datetime.utcfromtimestamp(sunset).strftime('%Y-%m-%d %H:%M:%S'),
-                'moonrise': datetime.utcfromtimestamp(moonrise).strftime('%Y-%m-%d %H:%M:%S'),
-                'moonset': datetime.utcfromtimestamp(moonset).strftime('%Y-%m-%d %H:%M:%S')})
-        return data
+#         data.update({
+#                 'dt': datetime.utcfromtimestamp(dt).strftime('%Y-%m-%d %H:%M:%S'),
+#                 'sunrise': datetime.utcfromtimestamp(sunrise).strftime('%Y-%m-%d %H:%M:%S'),
+#                 'sunset': datetime.utcfromtimestamp(sunset).strftime('%Y-%m-%d %H:%M:%S'),
+#                 'moonrise': datetime.utcfromtimestamp(moonrise).strftime('%Y-%m-%d %H:%M:%S'),
+#                 'moonset': datetime.utcfromtimestamp(moonset).strftime('%Y-%m-%d %H:%M:%S')})
+#         return data
         
 
-
-
-
-# print(data_dict[0]['dt'])
-
-# for index in data_dict:
-#         for key in index:
-#                 if key in dt_to_update:
-#                         key.it
-
-        
-        # j = int(i.get("sunrise"))
-        # print(datetime.utcfromtimestamp(j).strftime('%Y-%m-%d %H:%M:%S'))
-
-
-
-# take each value in specified keys
-# update with new format, date time variation
 
