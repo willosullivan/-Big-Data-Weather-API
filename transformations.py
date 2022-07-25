@@ -77,75 +77,11 @@ for i in data_dict:
 i = pd.json_normalize(data_dict)
 print(i)
 
+
 for index, row in i.iterrows():
+        list_of_lists = []
         to_update = row.to_list()
-        print(to_update)
-        break
-        updateValues(to_update)
+        list_of_lists.append(to_update)
+        # print(to_update)
 
-
-
-
-
-
-
-
-# for i in data_dict:
-#         for k in dt_to_update:
-#                 # i[k] = datetime.utcfromtimestamp(i[k]).strftime('%Y-%m-%d %H:%M:%S')
-#                 # i[k] = i[k]+36000
-#                 i[k] = (datetime.utcfromtimestamp(i[k])+timedelta(hours=10)).strftime('%Y-%m-%d %H:%M:%S')
-#                 # print(type(i[k]))
-
-                
-
-# print(json.dumps(data_dict, indent=2))
-
-
-# THE FUCNTION to apply: 
-# datetime.utcfromtimestamp(i).strftime('%Y-%m-%d %H:%M:%S')
-
-# The keys to apply it on: ['dt', 'sunrise', 'sunset', 'moonrise', 'moonset']
-
-
-
-
-        
-
-# for element in dt_to_update:
-#         for i in data_dict:
-#                 if str(element) == str(i):
-#                         print(data_dict[i])
-#                         data_dict[i] = int(data_dict[i])
-#                         data_dict[i].update(datetime.utcfromtimestamp(data_dict[i]).strftime('%Y-%m-%d %H:%M:%S'))
-
-# for i in data_dict:
-#         for key in dt_to_update:
-#                 if key in dt_to_update:
-#                         print(type(key))
-
-                
-
-
-
-
-# p = [data_dict.update(datetime.utcfromtimestamp(j).strftime('%Y-%m-%d %H:%M:%S')) for j in data_dict[0] if data_dict[0].keys() in dt_to_update]
-# print(p)
-
-
-# for i in dt_to_update:
-#         data_dict[i] - data_dict.update(datetime.utcfromtimestamp(i).strftime('%Y-%m-%d %H:%M:%S'))
-#         print(i)
-
-# def update_dict(data, dt, sunrise, sunset, moonrise, moonset):
-        
-#         data.update({
-#                 'dt': datetime.utcfromtimestamp(dt).strftime('%Y-%m-%d %H:%M:%S'),
-#                 'sunrise': datetime.utcfromtimestamp(sunrise).strftime('%Y-%m-%d %H:%M:%S'),
-#                 'sunset': datetime.utcfromtimestamp(sunset).strftime('%Y-%m-%d %H:%M:%S'),
-#                 'moonrise': datetime.utcfromtimestamp(moonrise).strftime('%Y-%m-%d %H:%M:%S'),
-#                 'moonset': datetime.utcfromtimestamp(moonset).strftime('%Y-%m-%d %H:%M:%S')})
-#         return data
-        
-
-
+        appendValues(list_of_lists)
