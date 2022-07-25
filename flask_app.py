@@ -1,7 +1,7 @@
 import requests
 import json
 from flask import Flask, render_template
-from apikey import API_KEY
+from api_utils.apikey import API_KEY
 
 longitude = 144.9578
 latitude = -37.8082

@@ -13,7 +13,7 @@ def retrieve_data():
         info = json.loads(data.text)
 
         
-        to_store = info['daily']
+        to_store = info['daily'] 
 
         return to_store
 
